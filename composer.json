@@ -1,5 +1,6 @@
 {
     "name": "shtatva/dynamic-crud",
+    "version": "1.0.0",
     "description": "Making the crud operation dynamic",
     "type": "project",
     "license": "MIT",
