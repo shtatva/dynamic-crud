@@ -14,8 +14,7 @@
             "name": "Harsh Shah"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "minimum-stability": "stable",
     "require": {
         "inertiajs/inertia-laravel": "^0.6.11"
     }
