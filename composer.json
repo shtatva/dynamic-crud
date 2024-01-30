@@ -1,0 +1,20 @@
+{
+    "name": "shtatva/dynamic-crud",
+    "description": "Making the crud operation dynamic",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Shtatva\\DynamicCrud\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Harsh Shah"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "inertiajs/inertia-laravel": "^0.6.11"
+    }
+}
