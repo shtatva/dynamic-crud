@@ -30,6 +30,10 @@ class CrudServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->publishes([
+            __DIR__.'/CrudServiceProvider.php' => app_path('/Providers')
+        ]);
+
         include __DIR__.'/routes.php';
     }
 }
