@@ -42,40 +42,38 @@ class CrudServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadMigrationsFrom(__DIR__.'/migrations');
-        $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadMigrationsFrom(__DIR__ . '/migrations');
+        $this->loadRoutesFrom(__DIR__ . '/routes.php');
 
         $this->publishes([
-            __DIR__.'/config/constants.php' => config_path('constants.php')
+            __DIR__ . '/config/constants.php' => config_path('constants.php')
         ], 'constants');
 
         $this->publishes([
-            __DIR__.'/CustomStubs' => app_path('CustomStubs')
+            __DIR__ . '/CustomStubs' => app_path('CustomStubs')
         ], 'custom_stubs');
 
         $this->publishes([
-            __DIR__.'/resources/js/Pages' => resource_path('js/Pages')
+            __DIR__ . '/resources/js/Pages' => resource_path('js/Pages')
         ], 'pages');
 
         $this->publishes([
-            __DIR__.'/resources/js/app.jsx' => resource_path('js/app.jsx')
+            __DIR__ . '/resources/js/app.jsx' => resource_path('js/app.jsx')
         ], 'app_react_file');
 
-        if($this->app->runningInConsole()){
-            $this->commands([
-                AddRoute::class,
-                CustomMigration::class,
-                DeleteController::class,
-                DeleteMigration::class,
-                DeleteMigrationFile::class,
-                DeleteModel::class,
-                DeleteModule::class,
-                DeleteRoute::class,
-                EditMigration::class,
-                GenerateController::class,
-                GenerateModel::class,
-                GenerateModule::class
-            ]);
-        }
+        $this->commands([
+            AddRoute::class,
+            CustomMigration::class,
+            DeleteController::class,
+            DeleteMigration::class,
+            DeleteMigrationFile::class,
+            DeleteModel::class,
+            DeleteModule::class,
+            DeleteRoute::class,
+            EditMigration::class,
+            GenerateController::class,
+            GenerateModel::class,
+            GenerateModule::class
+        ]);
     }
 }
