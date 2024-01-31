@@ -30,9 +30,11 @@ class CrudServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->publishes([
-            __DIR__.'/CrudServiceProvider.php' => app_path('/Providers')
-        ]);
+        // $this->publishes([
+        //     __DIR__.'/CrudServiceProvider.php' => app_path('/Providers')
+        // ]);
+
+        $this->loadMigrationsFrom(__DIR__.'/migrations');
 
         include __DIR__.'/routes.php';
     }
