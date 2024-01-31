@@ -44,13 +44,22 @@ class CrudServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__.'/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
+
         $this->publishes([
             __DIR__.'/config/constants.php' => config_path('constants.php')
-        ]);
+        ], 'constants');
 
         $this->publishes([
             __DIR__.'/CustomStubs' => app_path('CustomStubs')
         ], 'custom_stubs');
+
+        $this->publishes([
+            __DIR__.'/resources/js/Pages' => resource_path('js/Pages')
+        ], 'pages');
+
+        $this->publishes([
+            __DIR__.'/resources/js/app.jsx' => resource_path('js/app.jsx')
+        ], 'app_react_file');
 
         if($this->app->runningInConsole()){
             $this->commands([
