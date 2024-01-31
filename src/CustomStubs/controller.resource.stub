@@ -1,0 +1,104 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Interfaces\DatabaseRepositoryInterface;
+use App\Interfaces\TableRepositoryInterface;
+use App\Models\{{ model }};
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+
+class {{ class }} extends Controller
+{
+    private DatabaseRepositoryInterface $databaseRepository;
+    private TableRepositoryInterface $tableRepository;
+    private $tableName;
+
+    public function __construct(DatabaseRepositoryInterface $databaseRepository, TableRepositoryInterface $tableRepository)
+    {
+        $this->databaseRepository = $databaseRepository;
+        $this->databaseRepository->setModel(new {{ model }}());
+        $this->tableRepository = $tableRepository;
+        $this->tableName = $this->databaseRepository->getTableName();
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $table = $this->tableRepository->getTableFromName($this->tableName);
+
+        $data = $this->databaseRepository->fetchAll();
+        return Inertia::render('Module/Listing', [
+            'tables' => $data,
+            'tableName' => $this->databaseRepository->getTableName(),
+            'tableFields' => $table->tablefields
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $table = $this->tableRepository->getTableFromName($this->tableName);
+        $tableFields = $table->tablefields;
+
+        return Inertia::render('Module/Create', [
+            'tableFields' => $tableFields,
+            'tableName' => $this->tableName
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $this->databaseRepository->create($request->all());
+        return to_route($this->tableName . '.index');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show({{ model }} ${{ tableName }})
+    {
+        return ${{ tableName }};
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit({{ model }} ${{ tableName }})
+    {
+        $table = $this->tableRepository->getTableFromName($this->tableName);
+        $tableFields = $table->tablefields;
+
+        return Inertia::render('Module/Create', [
+            'tableFields' => $tableFields,
+            'tableName' => $this->tableName,
+            'isEdit' => true,
+            'initialFormData' => ${{ tableName }}
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, {{ model }} ${{ tableName }})
+    {
+        $this->databaseRepository->update(${{ tableName }}, $request->all());
+        return to_route($this->tableName . '.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy({{ model }} ${{ tableName }})
+    {
+        $this->databaseRepository->delete(${{ tableName }});
+        return to_route($this->tableName . '.index');
+    }
+}
