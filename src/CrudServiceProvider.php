@@ -3,6 +3,18 @@
 namespace Shtatva\DynamicCrud;
 
 use Illuminate\Support\ServiceProvider;
+use Shtatva\DynamicCrud\Console\Commands\AddRoute;
+use Shtatva\DynamicCrud\Console\Commands\CustomMigration;
+use Shtatva\DynamicCrud\Console\Commands\DeleteController;
+use Shtatva\DynamicCrud\Console\Commands\DeleteMigration;
+use Shtatva\DynamicCrud\Console\Commands\DeleteMigrationFile;
+use Shtatva\DynamicCrud\Console\Commands\DeleteModel;
+use Shtatva\DynamicCrud\Console\Commands\DeleteModule;
+use Shtatva\DynamicCrud\Console\Commands\DeleteRoute;
+use Shtatva\DynamicCrud\Console\Commands\EditMigration;
+use Shtatva\DynamicCrud\Console\Commands\GenerateController;
+use Shtatva\DynamicCrud\Console\Commands\GenerateModel;
+use Shtatva\DynamicCrud\Console\Commands\GenerateModule;
 use Shtatva\DynamicCrud\Interfaces\DatabaseRepositoryInterface;
 use Shtatva\DynamicCrud\Interfaces\ModelRepositoryInterface;
 use Shtatva\DynamicCrud\Interfaces\ModuleRepositoryInterface;
@@ -30,11 +42,24 @@ class CrudServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $this->publishes([
-        //     __DIR__.'/CrudServiceProvider.php' => app_path('/Providers')
-        // ]);
-
         $this->loadMigrationsFrom(__DIR__.'/migrations');
+
+        if($this->app->runningInConsole()){
+            $this->commands([
+                AddRoute::class,
+                CustomMigration::class,
+                DeleteController::class,
+                DeleteMigration::class,
+                DeleteMigrationFile::class,
+                DeleteModel::class,
+                DeleteModule::class,
+                DeleteRoute::class,
+                EditMigration::class,
+                GenerateController::class,
+                GenerateModel::class,
+                GenerateModule::class
+            ]);
+        }
 
         include __DIR__.'/routes.php';
     }
