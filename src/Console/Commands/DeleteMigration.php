@@ -27,7 +27,7 @@ class DeleteMigration extends Command
     public function handle()
     {
         $tableName = $this->argument('name');
-        $stubFilePath = base_path('stubs/migration.delete.stub');
+        $stubFilePath = app_path('CustomStubs/migration.delete.stub');
         $stubContent = File::get($stubFilePath);
         $stubContent = str_replace('{{ table }}', $tableName, $stubContent);
 

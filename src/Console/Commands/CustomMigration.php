@@ -28,7 +28,7 @@ class CustomMigration extends Command
     public function handle()
     {
         $tableName = $this->argument('name');
-        $stubFilePath = base_path('stubs/migration.create.stub');
+        $stubFilePath = app_path('CustomStubs/migration.create.stub');
         $stubContent = File::get($stubFilePath);
         $stubContent = str_replace('{{ table }}', $tableName, $stubContent);
         $columns = $this->generateColumns($tableName);

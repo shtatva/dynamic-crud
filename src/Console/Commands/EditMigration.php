@@ -40,7 +40,7 @@ class EditMigration extends Command
         $table = $this->tableRepository->getTableFromName($tableName);
         $allTableFields = $table->tablefields;
 
-        $stubFilePath = base_path('stubs/migration.update-rename.stub');
+        $stubFilePath = app_path('CustomStubs/migration.update-rename.stub');
         $stubContent = File::get($stubFilePath);
         $stubContent = str_replace('{{ table }}', $tableName, $stubContent);
 
@@ -97,7 +97,7 @@ class EditMigration extends Command
 
     public function renameColumnMigrationSyntax($tableField, $tableName)
     {
-        $stubFilePath = base_path('stubs/rename.stub');
+        $stubFilePath = app_path('CustomStubs/rename.stub');
         $stubContent = File::get($stubFilePath);
         $stubContent = str_replace('{{ table }}', $tableName, $stubContent);
         $stubContent = str_replace('{{ current_value }}', $tableField->is_dirty_rename_old, $stubContent);
