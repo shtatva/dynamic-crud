@@ -75,4 +75,17 @@ export default defineConfig({
 });
 ```
 
+Lastly we have to run the migration for importing table to the database.
+
+```
+php artisan migrate
+```
+
+Okay, and the final step — run the local server and run vite in the terminal:
+
+```
+php artisan serve
+npm run dev
+```
+
 
