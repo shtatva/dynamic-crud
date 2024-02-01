@@ -2,6 +2,7 @@
 
 namespace Shtatva\DynamicCrud;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Shtatva\DynamicCrud\Console\Commands\AddRoute;
 use Shtatva\DynamicCrud\Console\Commands\CustomMigration;
@@ -19,6 +20,7 @@ use Shtatva\DynamicCrud\Interfaces\DatabaseRepositoryInterface;
 use Shtatva\DynamicCrud\Interfaces\ModelRepositoryInterface;
 use Shtatva\DynamicCrud\Interfaces\ModuleRepositoryInterface;
 use Shtatva\DynamicCrud\Interfaces\TableRepositoryInterface;
+use Shtatva\DynamicCrud\Models\Table;
 use Shtatva\DynamicCrud\Repositories\DatabaseRepository;
 use Shtatva\DynamicCrud\Repositories\ModelRepository;
 use Shtatva\DynamicCrud\Repositories\ModuleRepository;
@@ -44,6 +46,7 @@ class CrudServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
+        Route::model('table', Table::class);
 
         $this->publishes([
             __DIR__ . '/config/constants.php' => config_path('constants.php')
