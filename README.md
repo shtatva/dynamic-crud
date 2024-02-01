@@ -18,3 +18,28 @@ To install this library, you can use [Composer](https://getcomposer.org/). Add t
         }
     ]
 }
+```
+
+Now run the following command to fetch and update the required dependencies:
+
+```
+composer update
+```
+
+Add these lines in the package.json file
+
+```json
+{
+    "dependencies": {
+        "dynamic-crud-react": "github:shtatva/dynamic-crud-react#main"
+    }    
+}
+```
+
+Now run the following command to fetch and update the required dependencies:
+
+```
+npm install
+```
+
+
