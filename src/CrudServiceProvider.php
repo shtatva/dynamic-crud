@@ -61,6 +61,10 @@ class CrudServiceProvider extends ServiceProvider
             __DIR__ . '/resources/js/app.jsx' => resource_path('js/app.jsx')
         ], 'app_react_file');
 
+        $this->publishes([
+            __DIR__ . '/resources/app.blade.php' => resource_path('app.blade.php')
+        ], 'app_laravel_file');
+
         $this->commands([
             AddRoute::class,
             CustomMigration::class,
