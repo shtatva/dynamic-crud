@@ -7,6 +7,7 @@ use Shtatva\DynamicCrud\Models\TableField;
 
 interface TableRepositoryInterface
 {
+    public function getTable($id);
     public function getAllTables();
     public function getTableFromName($name);
     public function createTable($data);

@@ -91,10 +91,10 @@ class TableController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Table $table)
+    public function edit($tableId)
     {
         try {
-            
+            $table = $this->tableRepository->getTable($tableId);
             $isModuleCreated = $table->module ? true : false;
 
             $initialFormData = [
@@ -117,10 +117,11 @@ class TableController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Table $table)
+    public function update(Request $request, $tableId)
     {
         try {
             $fields = $request->input('table_fields');
+            $table = $this->tableRepository->getTable($tableId);
             $currentTablefields = $table->tablefields;
 
             $createNewFields = [];
@@ -168,9 +169,10 @@ class TableController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Table $table)
+    public function destroy($tableId)
     {
         try {
+            $table = $this->tableRepository->getTable($tableId);
 
             if ($table->module) {
                 Artisan::call('app:delete-module', [

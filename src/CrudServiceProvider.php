@@ -16,6 +16,7 @@ use Shtatva\DynamicCrud\Console\Commands\EditMigration;
 use Shtatva\DynamicCrud\Console\Commands\GenerateController;
 use Shtatva\DynamicCrud\Console\Commands\GenerateModel;
 use Shtatva\DynamicCrud\Console\Commands\GenerateModule;
+use Shtatva\DynamicCrud\Console\Commands\PublishAllFiles;
 use Shtatva\DynamicCrud\Interfaces\DatabaseRepositoryInterface;
 use Shtatva\DynamicCrud\Interfaces\ModelRepositoryInterface;
 use Shtatva\DynamicCrud\Interfaces\ModuleRepositoryInterface;
@@ -80,7 +81,8 @@ class CrudServiceProvider extends ServiceProvider
             EditMigration::class,
             GenerateController::class,
             GenerateModel::class,
-            GenerateModule::class
+            GenerateModule::class,
+            PublishAllFiles::class
         ]);
     }
 }

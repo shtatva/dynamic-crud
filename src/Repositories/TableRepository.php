@@ -9,6 +9,11 @@ use Shtatva\DynamicCrud\Models\TableField;
 
 class TableRepository implements TableRepositoryInterface
 {
+    public function getTable($id)
+    {
+        return Table::find($id);
+    }
+
     public function getAllTables()
     {
         return Table::all();
