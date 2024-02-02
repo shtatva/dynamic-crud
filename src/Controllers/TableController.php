@@ -63,7 +63,7 @@ class TableController extends Controller
 
             Artisan::call('migrate');
 
-            return to_route('table.index');
+            return Inertia::location('/table');
         } catch (Throwable $th) {
             return response()->json($th->getMessage());
         }
@@ -160,7 +160,7 @@ class TableController extends Controller
 
             Artisan::call('migrate');
 
-            return to_route('table.index');
+            return Inertia::location('/table');
         } catch (\Throwable $th) {
             return response()->json($th->getMessage());
         }
@@ -191,7 +191,7 @@ class TableController extends Controller
             }
             $this->deleteAllMigrationFiles($table->name);
 
-            return to_route('table.index');
+            return Inertia::location('/table');
         } catch (Throwable $th) {
             return response()->json($th->getMessage());
         }
