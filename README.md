@@ -41,6 +41,20 @@ And to use the middleware that we just generated, open the app/Http/Kernel.php f
 ],
 ```
 
+Run these command to publish all files
+
+```
+php artisan app:publish-all-files
+```
+
+Add the follwing lines to the web.php routes file
+```
+Route::namespace('App\Http\Controllers')->group(function () {
+    // Add more routes within the same namespace here
+				
+});
+```
+
 Add these lines in the package.json file
 
 ```json
