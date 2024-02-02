@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\DatabaseRepositoryInterface;
-use App\Interfaces\TableRepositoryInterface;
+use Shtatva\DynamicCrud\Interfaces\DatabaseRepositoryInterface;
+use Shtatva\DynamicCrud\Interfaces\TableRepositoryInterface;
 use App\Models\{{ model }};
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -71,8 +71,9 @@ class {{ class }} extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit({{ model }} ${{ tableName }})
+    public function edit($id)
     {
+        ${{ tableName }} = $this->databaseRepository->fetch($id);
         $table = $this->tableRepository->getTableFromName($this->tableName);
         $tableFields = $table->tablefields;
 
@@ -87,8 +88,9 @@ class {{ class }} extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, {{ model }} ${{ tableName }})
+    public function update(Request $request, $id)
     {
+        ${{ tableName }} = $this->databaseRepository->fetch($id);
         $this->databaseRepository->update(${{ tableName }}, $request->all());
         return to_route($this->tableName . '.index');
     }
@@ -96,8 +98,9 @@ class {{ class }} extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy({{ model }} ${{ tableName }})
+    public function destroy($id)
     {
+        ${{ tableName }} = $this->databaseRepository->fetch($id);
         $this->databaseRepository->delete(${{ tableName }});
         return to_route($this->tableName . '.index');
     }
