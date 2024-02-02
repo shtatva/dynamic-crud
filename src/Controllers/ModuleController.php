@@ -6,15 +6,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Inertia\Inertia;
 use Shtatva\DynamicCrud\Interfaces\ModuleRepositoryInterface;
+use Shtatva\DynamicCrud\Interfaces\TableRepositoryInterface;
 use Shtatva\DynamicCrud\Models\Table;
 
 class ModuleController extends Controller
 {
     private ModuleRepositoryInterface $moduleRepository;
+    private TableRepositoryInterface $tableRepository;
 
-    public function __construct(ModuleRepositoryInterface $moduleRepository)
+    public function __construct(ModuleRepositoryInterface $moduleRepository, TableRepositoryInterface $tableRepository)
     {
         $this->moduleRepository = $moduleRepository;
+        $this->tableRepository = $tableRepository;
     }
 
     public function listingModules()
@@ -31,10 +34,11 @@ class ModuleController extends Controller
         }
     }
 
-    public function store(Table $table)
+    public function store($tableId)
     {
 
         try {
+            $table = $this->tableRepository->getTable($tableId);
             $this->moduleRepository->create($table, [
                 'name' => $table->name
             ]);
@@ -43,15 +47,16 @@ class ModuleController extends Controller
                 'tableName' => $table->name
             ]);
 
-            return to_route('table.index');
+            return Inertia::location('/module');
         } catch (\Throwable $th) {
             return response()->json($th->getMessage());
         }
     }
 
-    public function delete(Table $table)
+    public function delete($tableId)
     {
         try {
+            $table = $this->tableRepository->getTable($tableId);
             $module = $table->module;
 
             if ($module) {
@@ -60,7 +65,7 @@ class ModuleController extends Controller
                 ]);
             }
 
-            return to_route('table.index');
+            return Inertia::location('/module');
         } catch (\Throwable $th) {
             return response()->json($th->getMessage());
         }
