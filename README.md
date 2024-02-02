@@ -8,9 +8,6 @@ To install this library, you can use [Composer](https://getcomposer.org/). Add t
 
 ```json
 {
-    "require": {
-        "shtatva/dynamic-crud": "dev-main"
-    },
     "repositories": [
         {
             "type": "vcs",
@@ -23,7 +20,7 @@ To install this library, you can use [Composer](https://getcomposer.org/). Add t
 Now run the following command to fetch and update the required dependencies:
 
 ```
-composer update
+composer require shtatva/dynamic-crud
 ```
 
 We need to generate a middleware for Inertia by using the next command:
